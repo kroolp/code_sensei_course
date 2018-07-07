@@ -4,11 +4,30 @@ class Book
     @number_of_pages = number_of_pages
   end
 
+  def title
+    @title
+  end
+
+  def number_of_pages
+    @number_of_pages
+  end
+
   def to_s
     "#{@title} has #{@number_of_pages} pages"
   end
 end
 
-book = Book.new("Bolek i Lolek", 120)
+books = [
+  Book.new("Bolek i Lolek", 120),
+  Book.new("Pan Tadeusz", 300),
+  Book.new("W pustyni i w puszczy", 220)
+]
 
-puts book
+def book_exists?(books, title)
+  books.any? do |book|
+    book.title == title
+  end
+end
+
+puts book_exists?(books, "Sierotka Marysia")
+puts book_exists?(books, "Pan Tadeusz")
