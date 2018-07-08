@@ -1,5 +1,5 @@
 class Pizzeria
-  attr_reader :pizzas
+  attr_reader :pizzas, :balance
 
   def initialize(pizza_names)
     @balance = 0
@@ -7,6 +7,16 @@ class Pizzeria
 
     pizza_names.each do |pizza_name|
       add_pizza(pizza_name)
+    end
+  end
+
+  def make_order(user, pizzas)
+    pizzas.each do |pizza|
+      if @pizzas.include?(pizza) && user.balance >= pizza.prize
+        user.balance -= pizza.prize
+        @balance += pizza.prize
+        puts "User kupił pizze #{pizza.name}"
+      end
     end
   end
 
@@ -37,6 +47,12 @@ class Pizza
   def to_s
     "name: #{@name}, prize: #{@prize}, size: #{size}"
   end
+
+  def ==(other)
+    name == other.name &&
+    prize == other.prize &&
+    size == other.size
+  end
 end
 
 class User
@@ -52,8 +68,11 @@ pizza_names = ["Margarita", "Capricossa", "Parma", "Kebab"]
 pizzeria = Pizzeria.new(pizza_names)
 puts pizzeria.pizzas
 puts "******************"
-pizzeria.add_pizza("Wege")
-puts pizzeria.pizzas
-puts "******************"
-pizzeria.remove_pizza("Wege")
-puts pizzeria.pizzas
+user = User.new(60)
+user_pizzas = [
+  Pizza.new('Capricossa', 20, 32),
+  Pizza.new('Parma', 40, 52)
+]
+pizzeria.make_order(user, user_pizzas)
+puts "User balance: #{user.balance}"
+puts "Pizzeria balance: #{pizzeria.balance}"
