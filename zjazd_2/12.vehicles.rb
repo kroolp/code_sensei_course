@@ -1,5 +1,5 @@
 class Trip
-  attr_reader :cost
+  attr_reader :cost, :vehicles
 
   def initialize(vehicles)
     @vehicles = vehicles
@@ -7,15 +7,15 @@ class Trip
   end
 
   def add_vehicle(vehicle)
-    ...
+    @vehicles << vehicle
   end
 
   def remove_vehicle(vehicle)
-    ...
+    @vehicles.delete(vehicle)
   end
 
   def calculate_cost
-    ...
+    @cost = @vehicles.sum { |vehicle| vehicle.cost }
   end
 end
 
@@ -32,7 +32,11 @@ class Vehicle
   end
 
   def ==(other)
-    ...
+    @name == other.name
+  end
+
+  def to_s
+    @name
   end
 end
 
@@ -62,7 +66,10 @@ class Bike < Vehicle
   end
 end
 
-vehicles = [Car.new('Ford', 0.3), Train.new('2'), Bike.new('kolarski')]
+car_1 = Car.new('Ford', 0.3)
+train = Train.new('2')
+bike = Bike.new('kolarski')
+vehicles = [car_1, train, bike]
 trip = Trip.new(vehicles)
 
 vehicles[0].go(100)
@@ -72,11 +79,19 @@ vehicles[1].go(6)
 vehicles[2].go(30)
 
 trip.calculate_cost
-puts trip.cost
+puts "Trip cost: #{trip.cost}"
 puts "*******************"
-new_car = Car.new('Fiat', 0.4)
-trip.add_vehicle(new_car)
-new_car.go(30)
+
+car_2 = Car.new('Fiat', 0.4)
+trip.add_vehicle(car_2)
+car_2.go(30)
 trip.calculate_cost
-puts trip.cost
+puts "Trip cost: #{trip.cost}"
+puts "*******************"
+
+trip.remove_vehicle(car_1)
+trip.remove_vehicle(train)
+trip.remove_vehicle(bike)
+trip.calculate_cost
+puts "Trip cost: #{trip.cost}"
 puts "*******************"
