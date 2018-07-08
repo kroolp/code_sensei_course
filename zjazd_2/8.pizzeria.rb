@@ -12,9 +12,9 @@ class Pizzeria
 
   def make_order(user, pizzas)
     pizzas.each do |pizza|
-      if @pizzas.include?(pizza) && user.balance >= pizza.prize
-        user.balance -= pizza.prize
-        @balance += pizza.prize
+      if @pizzas.include?(pizza) && user.balance >= pizza.price
+        user.balance -= pizza.price
+        @balance += pizza.price
         puts "User kupił pizze #{pizza.name}"
       end
     end
@@ -36,21 +36,21 @@ class Pizzeria
 end
 
 class Pizza
-  attr_reader :name, :prize, :size
+  attr_reader :name, :price, :size
 
-  def initialize(name, prize, size)
+  def initialize(name, price, size)
     @name = name
-    @prize = prize
+    @price = price
     @size = size
   end
 
   def to_s
-    "name: #{@name}, prize: #{@prize}, size: #{size}"
+    "name: #{@name}, price: #{@price}, size: #{size}"
   end
 
   def ==(other)
     name == other.name &&
-    prize == other.prize &&
+    price == other.price &&
     size == other.size
   end
 end
