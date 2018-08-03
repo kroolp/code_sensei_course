@@ -1,0 +1,7 @@
+{
+  "products": [
+    { "name": "marchew", "price": 0.1, "quantity": 14 },
+    { "name": "pietruszka", "price": 0.15, "quantity": 15 },
+    { "name": "czekolada", "price": 3.0, "quantity": 5 }
+  ]
+}
