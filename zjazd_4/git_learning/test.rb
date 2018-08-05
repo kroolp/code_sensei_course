@@ -1,5 +1,5 @@
-def hello(name)
-  puts "Hello #{name}"
+def hello(first_name, last_name)
+  puts "Hello #{first_name} #{last_name}"
 end
 
-hello("Janek")
+hello("Janek", "Kowalski")
