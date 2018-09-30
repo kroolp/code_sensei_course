@@ -1,14 +1,20 @@
 RSpec.describe Math do
   describe ".sqrt" do
+    let(:result) { Math.sqrt(number) }
+
     context "when argument is natural number" do
+      let(:number) { 2 }
+
       it "calculates proper square root" do
-        expect(Math.sqrt(4)).to eq 2
+        expect(result).to eq 2
       end
     end
 
     context "when argument is real number" do
+      let(:number) { 3.5 }
+
       it "calculates proper square root" do
-        expect(Math.sqrt(3.5)).to be > 1.8
+        expect(result).to be > 1.8
       end
     end
   end
