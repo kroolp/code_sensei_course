@@ -6,7 +6,9 @@ class Converter
   end
 
   def convert_to_currency(value_in_pln, currency)
-    value_in_pln / fetch(currency)
+    currency_value = fetch(currency)
+
+    value_in_pln / currency_value if currency_value
   end
 
   private
